@@ -170,8 +170,8 @@ data:
 
 将以上配置文件文件保存为`prometheus-config.yaml`，再执行
 
-{{< highlight bash >}}
-kubectl create -f prometheus-config.yaml
+{{< highlight console >}}
+$ kubectl create -f prometheus-config.yaml
 {{< /highlight >}}
 
 接下来通过`Deployment`部署Prometheus
@@ -224,8 +224,8 @@ spec:
 
 将以上文件保存为`prometheus-deployment.yaml`，接着运行
 
-{{< highlight bash >}}
-kubectl create -f prometheus-deployment.yaml
+{{< highlight console >}}
+$ kubectl create -f prometheus-deployment.yaml
 {{< /highlight >}}
 
 如果是在国内环境，可以用`registry.cn-hangzhou.aliyuncs.com/tryk8s/prometheus:v1.0.1`
@@ -233,14 +233,14 @@ kubectl create -f prometheus-deployment.yaml
 
 为了在本地访问Prometheus的web界面，我们利用`kubectl port-forward`将它暴露到本地
 
-{{< highlight bash >}}
-POD=`kubectl get pod -l app=prometheus -o go-template --template '{{range .items}}{{.metadata.name}}{{end}}'`
-kubeclt port-forward $POD 9090:9090
+{{< highlight console >}}
+$ POD=`kubectl get pod -l app=prometheus -o go-template --template '{{range .items}}{{.metadata.name}}{{end}}'`
+$ kubeclt port-forward $POD 9090:9090
 {{< /highlight >}}
 
 这时我们用浏览器访问`http://127.0.0.1:9090`来访问Prometheus的界面，查看已经搜集到的数据。
 
-{{< figure src="/img/prometheus-web-ui.png" >}}
+{{< figure src="/img/prometheus-web-ui.png" link="/img/prometheus-web-ui.png" >}}
 
 ## 查询监控数据
 
@@ -249,11 +249,11 @@ Prometheus提供API方式的数据查询接口，用户可以使用query语言�
 
 首先查询每个容器的内存使用情况，查询`container_memory_usage_bytes{image=~".+"}`
 
-{{< figure src="/img/container-memory.png" >}}
+{{< figure src="/img/container-memory.png" link="/img/container-memory.png" >}}
 
 接下来查询各个`Pod`的CPU使用情况，查询条件是`pod:cpu_usage_seconds:1m`。
 
-{{< figure src="/img/pod-cpu.png" >}}
+{{< figure src="/img/pod-cpu.png" link="/img/pod-cpu.png">}}
 
 更多的查询条件可以参考Prometheus的文档，将来也会逐步介绍，这里就不详细展开了。
 

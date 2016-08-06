@@ -182,6 +182,7 @@ pre code {
 .highlight pre {
   margin-bottom: 0;
   background-color: #272822;
+  color: #f8f8f2;
 }
 
 /* Quotes */
