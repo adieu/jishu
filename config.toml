@@ -1,4 +1,4 @@
-baseurl = "http://jishu.io/"
+baseurl = "https://jishu.io/"
 languageCode = "en-us"
 title = "极术"
 theme = "hyde"
