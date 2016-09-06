@@ -235,7 +235,7 @@ $ kubectl create -f prometheus-deployment.yaml
 
 {{< highlight console >}}
 $ POD=`kubectl get pod -l app=prometheus -o go-template --template '{{range .items}}{{.metadata.name}}{{end}}'`
-$ kubeclt port-forward $POD 9090:9090
+$ kubectl port-forward $POD 9090:9090
 {{< /highlight >}}
 
 这时我们用浏览器访问`http://127.0.0.1:9090`来访问Prometheus的界面，查看已经搜集到的数据。
@@ -251,7 +251,7 @@ Prometheus提供API方式的数据查询接口，用户可以使用query语言�
 
 {{< figure src="/img/container-memory.png" link="/img/container-memory.png" >}}
 
-接下来查询各个`Pod`的CPU使用情况，查询条件是`pod:cpu_usage_seconds:1m`。
+接下来查询各个`Pod`的CPU使用情况，查询条件是`sum(rate(container_cpu_usage_seconds_total{kubernetes_pod_name=~".+", job="kubernetes-nodes"}[1m])) by (kubernetes_pod_name, kubernetes_namespace)`。
 
 {{< figure src="/img/pod-cpu.png" link="/img/pod-cpu.png">}}
 
