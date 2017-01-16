@@ -42,7 +42,7 @@ Prometheus集成了数据采集，存储，异常告警多项功能，是一款�
 
 首先将Prometheus的配置文件，存为`ConfigMap`。
 
-{{< highlight yaml >}}
+{{< highlight yaml "lineseparator=<br>" >}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -170,13 +170,13 @@ data:
 
 将以上配置文件文件保存为`prometheus-config.yaml`，再执行
 
-{{< highlight console >}}
+{{< highlight console "lineseparator=<br>" >}}
 $ kubectl create -f prometheus-config.yaml
 {{< /highlight >}}
 
 接下来通过`Deployment`部署Prometheus
 
-{{< highlight yaml >}}
+{{< highlight yaml "lineseparator=<br>" >}}
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -224,7 +224,7 @@ spec:
 
 将以上文件保存为`prometheus-deployment.yaml`，接着运行
 
-{{< highlight console >}}
+{{< highlight console "lineseparator=<br>" >}}
 $ kubectl create -f prometheus-deployment.yaml
 {{< /highlight >}}
 
@@ -233,7 +233,7 @@ $ kubectl create -f prometheus-deployment.yaml
 
 为了在本地访问Prometheus的web界面，我们利用`kubectl port-forward`将它暴露到本地
 
-{{< highlight console >}}
+{{< highlight console "lineseparator=<br>" >}}
 $ POD=`kubectl get pod -l app=prometheus -o go-template --template '{{range .items}}{{.metadata.name}}{{end}}'`
 $ kubectl port-forward $POD 9090:9090
 {{< /highlight >}}

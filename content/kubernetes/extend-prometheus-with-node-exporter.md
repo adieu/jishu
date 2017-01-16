@@ -26,7 +26,7 @@ Prometheus提供多种类型的Exporter用于采集各种不同服务的运行�
 
 将以下配置文件保存为`node-exporter.yaml`， 并运行 `kubectl create -f node-exporter.yaml`。
 
-{{< highlight yaml >}}
+{{< highlight yaml "lineseparator=<br>" >}}
 apiVersion: v1
 kind: Service
 metadata:
