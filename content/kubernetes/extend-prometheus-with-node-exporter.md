@@ -83,7 +83,7 @@ spec:
 
 接着查询`rate(node_network_receive_bytes[1m])`，`rate(node_network_transmit_bytes[1m])`这两项网络使用情况。
 
-{{< figure src="/img/node-load.png" link="/img/node-load.png" >}}
+{{< figure src="/img/node-network-receive-bytes.png" link="/img/node-network-receive-bytes.png" >}}
 
 以及`node_memory_MemAvailable`所代表的剩余内存情况。
 
