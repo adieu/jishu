@@ -80,7 +80,7 @@ Flannel的工作方式有2点是需要注意的。一是所有服务器上运行
 ### allocate-node-cidrs
 
 `allocate-node-cidrs`是[controller-manager]的一个参数，当它和`cluster-cidr`参数共同使用的时候，`controller-manager`会为所有的Node资源分配容器IP段，
-并将结果写入到PodCIDR字段。
+并将结果写入到`PodCIDR`字段。
 
 ### hostroutes
 
