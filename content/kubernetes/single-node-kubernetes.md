@@ -20,7 +20,7 @@ docker-engine`，立马就可以用`docker run`启动一个新的容器，
 服务发现等高级功能后，Docker Swarm与Kubernetes的复杂度是接近的。
 也许我们最初的比较出现了一点偏差，
 将位于更高阶的集群管理和调度系统Kubernetes和位于底层的容器引擎Docker
-Engine直接比较是不恰当的。
+Engine直接比较并不恰当。
 
 现在我们了解到Kubernetes的复杂是因为它提供了更多的功能，
 但是如果我们无法解决Kubernetes的上手困难问题，始终会有推广上的障碍。
