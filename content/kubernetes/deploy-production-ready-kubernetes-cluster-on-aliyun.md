@@ -91,10 +91,10 @@ CoreOS版本升级
 
 在顺利搭建好升级服务器之后，可以修改`/etc/coreos/update.conf`，添加`SERVER=https://YOUR_SERVER/v1/update/`这一条配置，然后使用以下指令来升级服务器：
 
-```
+{{< highlight console "lineseparator=<br>" >}}
 sudo systemctl restart update-engine
 update_engine_client -update
-```
+{{< /highlight >}}
 
 我们搭建了自己的升级服务器，如果有需要的朋友可以联系我们获得服务器地址。后面所有启动的CoreOS服务器，我们均假设管理员已经提前完成了版本升级的工作，
 在流程中不再重复。如果阿里云开始提供最新的CoreOS镜像，那这一步可以省略掉。
@@ -131,7 +131,7 @@ SSL证书和配置是使用Kubernetes过程中非常容易出问题的点。这�
 
 API Server证书主要用于客户端程序连接`apiserver`时进行加密和验证。可以使用以下模板作为CSR，填入相应的参数后生成：
 
-```json
+{{< highlight json "lineseparator=<br>" >}}
 {
     "CN": "${CLUSTER_NAME}",
     "hosts": [
@@ -149,7 +149,7 @@ API Server证书主要用于客户端程序连接`apiserver`时进行加密和�
         "size": 256
     }
 }
-```
+{{< /highlight >}}
 
 之后将以`${APISERVER_PEM}`和`${APISERVER_KEY}`分别表示生成出的证书和私匙。
 
@@ -157,7 +157,7 @@ API Server证书主要用于客户端程序连接`apiserver`时进行加密和�
 
 kubelet证书用于系统组件访问kubelet内置的HTTP Server，获取运行状态或者调用kubelet提供的功能时进行加密和验证。CSR模板如下：
 
-```json
+{{< highlight json "lineseparator=<br>" >}}
 {
     "CN": "${SERVER_NAME}",
     "hosts": [
@@ -170,7 +170,7 @@ kubelet证书用于系统组件访问kubelet内置的HTTP Server，获取运行�
         "size": 256
     }
 }
-```
+{{< /highlight >}}
 
 之后将以`${SERVER_PEM}`和`${SERVER_KEY}`分别表示生成出的证书和私匙。
 
@@ -178,7 +178,7 @@ kubelet证书用于系统组件访问kubelet内置的HTTP Server，获取运行�
 
 Service Account证书用于生成各个Namespace默认的token，以及进行token验证。在集群内部服务访问API Server时会使用这个token进行身份认证。CSR模板如下：
 
-```json
+{{< highlight json "lineseparator=<br>" >}}
 {
     "CN": "service-account",
     "hosts": [
@@ -189,7 +189,7 @@ Service Account证书用于生成各个Namespace默认的token，以及进行tok
         "size": 256
     }
 }
-```
+{{< /highlight >}}
 
 之后将以`${SERVICEACCOUNT_PEM}`和`${SERVICEACCOUNT_KEY}`分别表示生成出的证书和私匙。
 
@@ -197,7 +197,7 @@ Service Account证书用于生成各个Namespace默认的token，以及进行tok
 
 kubectl证书用于管理员或者用户远程访问集群，下达各种指令时的身份认证。CSR模板如下：
 
-```json
+{{< highlight json "lineseparator=<br>" >}}
 {
     "CN": "${USERNAME}",
     "hosts": [
@@ -208,7 +208,7 @@ kubectl证书用于管理员或者用户远程访问集群，下达各种指令�
         "size": 256
     }
 }
-```
+{{< /highlight >}}
 
 在创建集群时并不需要这一证书，但是在集群创建完成后需要为所有用户生成证书，才能配置好本地的kubectl，获得访问集群的权限。
 
@@ -225,7 +225,7 @@ CoreOS对etcd有原生的支持，我们可以使用CoreOS官方提供的`discov
 
 首先访问`https://discovery.etcd.io/new?size=3`，将得到的地址以及服务器IP地址填入以下文件当中：
 
-```yaml
+{{< highlight yaml "lineseparator=<br>" >}}
 #cloud-config
 
 coreos:
@@ -245,7 +245,7 @@ coreos:
         ExecStart=/usr/bin/systemctl start etcd2
         [Install]
         WantedBy=multi-user.target
-```
+{{< /highlight >}}
 
 接下来在VPC中创建3台服务器，并在服务器上创建文件`cloud-init.yaml`包含上面的内容。再使用`coreos-cloudinit -from-file cloud-init.yaml`对服务器进行初始化。
 
@@ -258,7 +258,7 @@ coreos:
 在Master服务器组上，我们将在每台服务器上通过`kubelet`运行`kube-aliyun`、`kube-controller-manager`、`kube-scheduler`这几个组件。
 为了简化配置流程，我们依然使用`cloud-init`来进行服务器初始化。将etcd服务器组的内网IP填入以下文件：
 
-```yaml
+{{< highlight yaml "lineseparator=<br>" >}}
 #cloud-config
 
 coreos:
@@ -533,7 +533,7 @@ write_files:
     owner: "root"
     content: |
       ${SERVER_KEY}
-```
+{{< /highlight >}}
 
 接下来使用`cloud-init`在新创建的2台服务器上完成服务器初始化。经过一定时间的镜像拉取，所有组件将正常启动，这时可以在主机上用`kubectl`来验证服务器的启动状态。
 
@@ -548,7 +548,7 @@ write_files:
 
 Node服务器组的初始化与Master服务器组的初始化类似。我们可以一次性启动N台服务器，然后在每台服务器上用以下配置进行初始化：
 
-```yaml
+{{< highlight console "lineseparator=<br>" >}}
 #cloud-config
 
 coreos:
@@ -676,7 +676,7 @@ write_files:
     owner: "root"
     content: |
       ${SERVER_KEY}
-```
+{{< /highlight >}}
 
 部署kube-aliyun与hostroutes
 ------------------------
@@ -684,13 +684,13 @@ write_files:
 `kube-aliyun`的Pod已经在Master服务器组的描述文件中进行了定义，但是这个Pod会因为缺少必要的Secret无法启动。
 我们创建这个Secret，来激活`kube-aliyun`：
 
-```
+{{< highlight console "lineseparator=<br>" >}}
 kubectl create secret generic aliyun-creds --namespace=kube-system --from-literal=accessKey=${YOUR_ACCESS_KEY} --from-literal=accessKeySecret=${YOUR_ACCESS_KEY_SECRET}
-```
+{{< /highlight >}}
 
 `hostroutes`是以DaemonSet的形式进行部署的。使用以下定义文件：
 
-```yaml
+{{< highlight yaml "lineseparator=<br>" >}}
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
@@ -714,7 +714,7 @@ spec:
           image: kubeup/hostroutes
           name: hostroutes
           command: [ "/hostroutes", "--in-cluster" ]
-```
+{{< /highlight >}}
 
 自动化部署和运维
 ========
