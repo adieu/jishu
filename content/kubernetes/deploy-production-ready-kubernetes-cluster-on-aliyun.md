@@ -548,7 +548,7 @@ write_files:
 
 Node服务器组的初始化与Master服务器组的初始化类似。我们可以一次性启动N台服务器，然后在每台服务器上用以下配置进行初始化：
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight yaml "lineseparator=<br>" >}}
 #cloud-config
 
 coreos:
