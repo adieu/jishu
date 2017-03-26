@@ -20,8 +20,7 @@ Kubernetes始终保持着小步快跑的节奏，在每个Release当中不断推
 
 {{< figure src="/img/cncf-landscape.jpg" link="/img/cncf-landscape.jpg" >}}
 
-容器引擎接口(Container Runtime Interface)
-====================================
+## 容器引擎接口(Container Runtime Interface)
 
 众所周知，[Kubernetes][kubernetes]和[Docker][docker]是既合作又竞争的关系。Kubernetes使用[Docker Engine][docker-engine]作为底层容器引擎，在容器编排领域与[Docker
 Swarm][docker-swarm]展开竞争。为了减少对Docker的依赖，同时满足生态中其他容器引擎与Kubernetes集成的需要，Kubernetes制定了[容器引擎接口CRI][cri]。
@@ -34,8 +33,7 @@ CRI的发布将Docker推到了一个非常难受的位置，如果不支持CRI�
 最终，为了不被边缘化，Docker只能妥协，选择[将containerd项目捐献给CNCF][containerd-donation]。在同一天，[CoreOS也宣布将rkt项目捐献给CNCF][rkt-donation]。
 至此CRI成为了容器引擎接口的统一标准，今后如果有新的容器引擎推出，将首先支持CRI。
 
-容器网络接口(Container Network Interface)
-===================================
+## 容器网络接口(Container Network Interface)
 
 因为Kubernetes没有内置容器网络组件，所以每一个Kubernetes用户都需要进行容器网络的选型，给新用户带来了不小的挑战。
 从现状来看，不内置网络组件的策略虽然增加了部署的复杂度，但给众多SDN厂商留下了足够的公平竞争空间，从中长期来讲是有利于容器网络领域的良性发展的。
@@ -47,15 +45,13 @@ CRI的发布将Docker推到了一个非常难受的位置，如果不支持CRI�
 用户可以根据需要为自己的Kubernetes集群选择适合的网络方案。面对CNI和CNM，主流厂商目前的选择是同时支持，但从中长期来看，
 厂商一定会根据各个生态的发展进度来动态配置资源，这时Docker内置的原生网络组件有可能反而会影响和其他网络厂商的协作。
 
-容器存储接口(Container Storage Interface)
-===================================
+## 容器存储接口(Container Storage Interface)
 
 在统一了容器引擎和容器网络之后，Kubernetes又将触角伸到了存储领域。[目前还在制定过程当中的容器存储接口CSI][csi]有望复制CRI和CNI的成功，
 为Kubernetes集群提供可替换的存储解决方案。不论是硬件存储厂商或是软件定义存储解决方案厂商，预计都将积极拥抱CSI。
 因为不支持CSI就意味着放弃整个Kubernetes生态圈。
 
-软件打包与分发(Packaging and Distribution)
-===================================
+## 软件打包与分发(Packaging and Distribution)
 
 在使用CRI，CNI，CSI解决底层运行环境的抽象以外，Kubernetes还在试图通过[Helm项目][helm]以及[Helm Charts][helm-charts]来统一软件打包与分发的环节。
 由于Kubernetes提供了底层的抽象，应用开发者可以利用Kubernetes内置的基础元素将上层应用打包为Chart，用户这时就能使用Helm完成一键安装以及一键升级的操作。
@@ -65,18 +61,16 @@ CRI的发布将Docker推到了一个非常难受的位置，如果不支持CRI�
 
 看到这一块商机的公司，比如CoreOS，[已经推出了自己的软件仓库服务][app-registry-release]。由于这块离最终用户最近，相信未来在这一领域的竞争将会非常激烈。
 
-云原生计算基金会(Cloud Native Computing Foundation)
-===========================================
+## 云原生计算基金会(Cloud Native Computing Foundation)
 
 前面列举的案例主要偏重技术解决方案，Kubernetes最有潜力的其实是在幕后团结容器生态中各方力量的[CNCF组织][cncf]。
 与同期建立的Docker主导的[OCI组织][oci]相比，当前CNCF不论是在项目数量，会员数量，会员质量等多个方面都明显领先。
 可以说CNCF是事实上在推动整个容器生态向前发展的核心力量。
 
 人的力量是最根本的也是最强大的，只有团结到尽可能多的玩家，才能制定出各方都能接受的标准。面对这么多的会员企业，要平衡各方的诉求实在不是容易的事情。
-目前CNCF似乎做的还不错。[最近正在进行决策小组选举的讨论][cncf-election]，有兴趣的朋友可以自行围观。
+目前CNCF似乎做的还不错，中立的基金会形式似乎更加容易被各方所接受。[最近正在进行决策小组选举的讨论][cncf-election]，有兴趣的朋友可以自行围观。
 
-总结
-==
+## 总结
 
 有两句经常听到的话在Kubernetes身上得到了很好的体现，一是没有什么是不能通过增加一个抽象层解决的，二是一流的企业做标准，二流的企业做品牌，三流的企业做产品。
 Kubernetes通过在具体实现上增加抽象层，试图为整个容器生态圈建立统一的标准。当标准逐步建立，用户开始依照标准选择解决方案，
