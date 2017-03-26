@@ -43,8 +43,8 @@ CRI的发布将Docker推到了一个非常难受的位置，如果不支持CRI�
 1.0版本的Kubernetes没有设计专门的网络接口，依赖Docker来实现每个Pod拥有独立IP、Pod之间可以不经过NAT互访的网络需要。
 随着与Docker的竞争加剧以及Docker主导的[CNM接口][cnm]的推出，Kubernetes也推出了自己的[容器网络接口CNI][cni]。
 
-随着CNI的推出，各家SDN解决方案厂商纷纷表示支持。目前[Flannel][flannel]，[Calico][calico]，[Weave][weave]，[Contiv][contiv]这几个热门项目均支持了CNI，
-用户可以根据需要为自己的Kubernetes集群选择适合的网络方案。面对CNI和CNW，主流厂商目前的选择是同时支持，但从中长期来看，
+随着CNI的推出，各家SDN解决方案厂商纷纷表示支持。目前[Flannel][flannel]，[Calico][calico]，[Weave][weave]，[Contiv][contiv]这几款热门项目均已支持CNI，
+用户可以根据需要为自己的Kubernetes集群选择适合的网络方案。面对CNI和CNM，主流厂商目前的选择是同时支持，但从中长期来看，
 厂商一定会根据各个生态的发展进度来动态配置资源，这时Docker内置的原生网络组件有可能反而会影响和其他网络厂商的协作。
 
 容器存储接口(Container Storage Interface)
@@ -58,7 +58,7 @@ CRI的发布将Docker推到了一个非常难受的位置，如果不支持CRI�
 ===================================
 
 在使用CRI，CNI，CSI解决底层运行环境的抽象以外，Kubernetes还在试图通过[Helm项目][helm]以及[Helm Charts][helm-charts]来统一软件打包与分发的环节。
-由于Kubernetes提供了底层的抽象，应用开发者可以利用Kubernetes内置的基础元素将上层应用打包为Chart，并使用Helm完成一键安装以及一键升级的操作。
+由于Kubernetes提供了底层的抽象，应用开发者可以利用Kubernetes内置的基础元素将上层应用打包为Chart，用户这时就能使用Helm完成一键安装以及一键升级的操作。
 
 在系统架构越来越复杂的今天，能够方便的将复杂的分布式系统运行起来，无疑为Kubernetes的推广增加了不少亮点。
 目前一些常见的开源系统，比如Redis，ElasticSearch等已经可以通过使用官方的Charts进行部署。相信未来会有更多的开源项目加入这个清单。
@@ -86,13 +86,13 @@ Kubernetes通过在具体实现上增加抽象层，试图为整个容器生态�
 可以预见Kubernetes构建的组织、标准、开源项目三层体系，将有望统一容器生态圈的各方力量，而这种统一对最终用户是有益的。
 在容器生态中的各个领域，开源的解决方案将与商业解决方案直接竞争，甚至开源解决方案之间也将展开竞争。这种竞争将促进整个容器生态的发展，
 由于大家都遵守相同的标准，不论你在最初建设时选择的是哪一套解决方案，将来也可以用更新更好的方案来替换，
-规避了商家绑定的风险。希望捐献给CNCF的项目会越来越多，因为进入CNCF就意味着比其他相同功能的开源项目更加容易获得Kubernetes生态圈的认可。
+规避了商家绑定的风险。希望捐献给CNCF的项目将会越来越多，因为进入CNCF就意味着比其他相同功能的开源项目更加容易获得Kubernetes生态圈的认可。
 
-最后插播一条小广告，为了解决Kubernetes与各个云平台之间的对接问题，我们开源了一款基于Kubernetes对底层云平台进行自动化运维的系统。项目的名称是[Archon][archon]，地址在
-[https://github.com/kubeup/archon][archon] 。希望Archon可以帮助Kubernetes统一对底层云平台的管理和操作方法，使得用户不论使用哪一家云平台均可以使用相同的方法进行管理，
+最后插播一条小广告，为了解决Kubernetes与各个云平台之间的对接问题，我们开源了一款基于Kubernetes对底层云平台进行自动化运维的系统。项目叫做[Archon][archon]，地址在
+[https://github.com/kubeup/archon][archon] 。希望Archon可以帮助Kubernetes统一对底层云平台的管理和操作方法，使得用户不论使用哪一家云平台均可以使用相同的方法进行运维和管理，
 以便用户可以在多个云平台之间自由的迁移。有兴趣的朋友可以试用并给我们反馈，帮助我们完善。
 
-3月29日，将在德国柏林举办[CloudNativeCon + KubeCon Europe][kubecon]，届时会带来更多关于Kubernetes 1.6的介绍。
+3月29日，将在德国柏林举办[CloudNativeCon + KubeCon Europe][kubecon]，届时会带来更多关于Kubernetes 1.6的介绍，
 对Kubernetes感兴趣的同学可以关注，更多激动人心的消息在等着大家。
 
 [k8s-16-release]: https://groups.google.com/forum/#!msg/kubernetes-dev/TSsAYVgjYzo/1CoCKuEGCQAJ
@@ -109,7 +109,7 @@ Kubernetes通过在具体实现上增加抽象层，试图为整个容器生态�
 [virtlet]: https://github.com/Mirantis/virtlet
 [containerd-donation]: https://blog.docker.com/2017/03/docker-donates-containerd-to-cncf/
 [rkt-donation]: https://coreos.com/blog/rkt-container-runtime-to-the-cncf.html
-[cnw]: https://github.com/docker/libnetwork/blob/master/docs/design.md
+[cnm]: https://github.com/docker/libnetwork/blob/master/docs/design.md
 [cni]: https://github.com/containernetworking/cni
 [flannel]: https://github.com/coreos/flannel
 [calico]: https://www.projectcalico.org/
