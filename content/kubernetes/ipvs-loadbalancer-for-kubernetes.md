@@ -22,7 +22,7 @@ IPVS被广泛的使用，用于承接网站入口处的流量。
 [Service][kubernetes-service]是Kubernetes的基础概念之一，它将一组Pod抽象成为一项服务，统一的对外提供服务，在各个Pod之间实现负载均衡。
 Service有多种类型，最基本的`ClusterIP`类型解决了集群内部访问服务的需求，`NodePort`类型通过Node节点的端口暴露服务，
 再配合上`LoadBalancer`类型所定义的负载均衡器，实现了流量经过前端负载均衡器分发到各个Node节点暴露出的端口，
-再通过iptables进行一次负载均衡，最终分发到实际的Pod上这个过程。
+再通过`iptables`进行一次负载均衡，最终分发到实际的Pod上这个过程。
 
 在Service的Spec中，`externalIPs`字段平常鲜有人提到，当把IP地址填入这个字段后，`kube-proxy`会增加对应的`iptables`规则，
 当有以对应IP为目标的流量发送到Node节点时，`iptables`将进行NAT，将流量转发到对应的服务上。一般情况下，
