@@ -7,7 +7,7 @@ Tags = ["Kubernetes","ipvs", "loadbalancer"]
 
 +++
 新搭建的Kubernetes集群如何承接外部访问的流量，是刚上手Kubernetes时常常会遇到的问题。
-在公有云上，官方给出了比较直接的答案，使用LoadBalancer类型的Service，利用公有云提供的负载均衡服务来承接流量，
+在公有云上，官方给出了比较直接的答案，使用`LoadBalancer`类型的Service，利用公有云提供的负载均衡服务来承接流量，
 同时在多台服务器之间进行负载均衡。而在私有环境中，如何正确的将外部流量引入到集群内部，却暂时没有标准的做法。
 本文将介绍一种基于IPVS来承接流量并实现负载均衡的方法，供大家参考。
 
@@ -55,7 +55,7 @@ $ kubectl run nginx --image=nginx --replicas=2
 $ kubectl expose deployment nginx --port 80 --external-ip 172.17.8.201
 {{< /highlight >}}
 
-查看`iptables`配置，确人对应的`iptables`规则已经被加入。
+查看`iptables`配置，确认对应的`iptables`规则已经被加入。
 
 {{< highlight console "lineseparator=<br>" >}}
 $ sudo iptables -t nat -L KUBE-SERVICES -n
