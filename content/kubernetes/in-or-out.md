@@ -6,7 +6,7 @@ date = "2017-03-24T07:33:00+08:00"
 title = "In or Out? Kubernetes一统江湖的野心 - 写在Kubernetes 1.6即将发布之际"
 
 +++
-如一切顺利的话，[Kubernetes 1.6将于3月27日发布][k8s-16-release]。虽然比预期延迟了一周，但是赶在了KubeCon之前，
+如一切顺利的话，[Kubernetes 1.6将于3月29日发布][k8s-16-release]。虽然比预期延迟了一周，但是赶在了KubeCon之前，
 对Kubernetes这个规模的项目来说已经实属不易。为了庆祝1.6版本的发布，撰文一篇讲讲目前Kubernetes生态圈的现状。
 
 自2014年发布以来，Kubernetes发展迅速，从最开始以源自Google最佳实践的容器管理平台亮相，
@@ -89,7 +89,7 @@ Kubernetes通过在具体实现上增加抽象层，试图为整个容器生态�
 3月29日，将在德国柏林举办[CloudNativeCon + KubeCon Europe][kubecon]，届时会带来更多关于Kubernetes 1.6的介绍，
 对Kubernetes感兴趣的同学可以关注，更多激动人心的消息在等着大家。
 
-[k8s-16-release]: https://groups.google.com/forum/#!msg/kubernetes-dev/TSsAYVgjYzo/1CoCKuEGCQAJ
+[k8s-16-release]: https://groups.google.com/forum/#!msg/kubernetes-dev/u6JfEThKUyY/xmfNtBXtCQAJ
 [docker-swarm]: https://docs.docker.com/engine/swarm/
 [mesos]: http://mesos.apache.org/
 [kubernetes]: https://kubernetes.io/
