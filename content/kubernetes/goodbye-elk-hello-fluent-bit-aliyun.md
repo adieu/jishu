@@ -109,8 +109,9 @@ $ kubectl get pods --namespace=kube-system
 - 当负载增加时，仅需要在阿里云添加更多的Shard即可，伸缩性更好
 - SaaS模式的计费方式，根据使用量计费，大部分情况下可以降低运行成本
 - 依赖阿里云日志服务的扩展功能，可以实现基于日志的消息处理总线，架构上更加灵活
-- 基于开源系统搭建，仅替换了`fluent-bit`的输出插件，可以复用input和filter插件。当需要切换后端时，前端无需修改。
-- 内置归档功能。只需要简单配置，即可将日志输出到OSS长期保存。
+- 基于开源系统搭建，仅替换了`fluent-bit`的输出插件，可以复用input和filter插件。当需要切换后端时，前端无需修改
+- 内置归档功能。只需要简单配置，即可将日志输出到OSS长期保存
+- 同时支持阿里云ECS以及阿里云以外的服务器，对于阿里云以外的服务器，可以将阿里云日志服务作为SaaS来使用
 
 `fluent-bit-aliyun`的项目地址在[https://github.com/kubeup/fluent-bit-aliyun][fluent-bit-aliyun]，欢迎大家试用和反馈。
 
