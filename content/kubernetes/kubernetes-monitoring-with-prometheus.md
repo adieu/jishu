@@ -170,7 +170,7 @@ data:
 
 将以上配置文件文件保存为`prometheus-config.yaml`，再执行
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ kubectl create -f prometheus-config.yaml
 {{< /highlight >}}
 
@@ -224,7 +224,7 @@ spec:
 
 将以上文件保存为`prometheus-deployment.yaml`，接着运行
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ kubectl create -f prometheus-deployment.yaml
 {{< /highlight >}}
 
@@ -233,7 +233,7 @@ $ kubectl create -f prometheus-deployment.yaml
 
 为了在本地访问Prometheus的web界面，我们利用`kubectl port-forward`将它暴露到本地
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ POD=`kubectl get pod -l app=prometheus -o go-template --template '{{range .items}}{{.metadata.name}}{{end}}'`
 $ kubectl port-forward $POD 9090:9090
 {{< /highlight >}}

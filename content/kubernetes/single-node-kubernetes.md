@@ -49,7 +49,7 @@ Engine直接比较并不恰当。
 
 接着下载[localkube]和`kubectl`:
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ curl -o localkube https://storage.googleapis.com/minikube/k8sReleases/v1.5.1/localkube-linux-amd64
 $ chmod +x localkube
 $ curl -O https://storage.googleapis.com/kubernetes-release/release/v1.5.2/bin/linux/amd64/kubectl
@@ -67,7 +67,7 @@ $ chmod +x kubectl
 
 使用`localkube`启动集群非常简单:
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ ./localkube
 {{< /highlight >}}
 
@@ -81,7 +81,7 @@ $ ./localkube
 
 接下来的操作与多节点的集群完全一样。我们可以用`kubectl`来控制集群，比如：
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ ./kubectl run nginx --image nginx
 {{< /highlight >}}
 

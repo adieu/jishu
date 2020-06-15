@@ -41,7 +41,7 @@ date = "2017-05-13T23:53:02+08:00"
 
 ### 创建Namespace
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ kubectl create namespace tsung
 {{< /highlight >}}
 
@@ -92,7 +92,7 @@ spec:
 
 在Kubernetes中创建相应的资源
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ kubectl create -f tsung-slave-svc.yaml --namespace tsung
 $ kubectl create -f tsung-slave.yaml --namespace tsung
 {{< /highlight >}}
@@ -194,7 +194,7 @@ spec:
 
 在Kubernetes中创建相应的资源
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ kubectl create -f tsung-config.yaml --namespace tsung
 $ kubectl create -f tsung-master-svc.yaml --namespace tsung
 $ kubectl create -f tsung-master.yaml --namespace tsung
@@ -210,7 +210,7 @@ $ kubectl create -f tsung-master.yaml --namespace tsung
 
 在Master的运行参数中，我们使用的`-k`参数将使得Master在测试完成后仍处于运行状态，这样用户可以通过`8091`端口访问到测试结果。
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ kubectl port-forward tsung-master-0 -n tsung 8091:8091
 {{< /highlight >}}
 
@@ -224,7 +224,7 @@ $ kubectl port-forward tsung-master-0 -n tsung 8091:8091
 
 测试结束后，用户可以使用报表界面查看和保存结果。当所有结果被保存下来之后，可以直接删除`Namespace`完成资源回收。
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ kubectl delete namespace tsung
 {{< /highlight >}}
 

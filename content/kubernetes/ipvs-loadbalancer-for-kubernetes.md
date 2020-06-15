@@ -45,19 +45,19 @@ Service有多种类型，最基本的`ClusterIP`类型解决了集群内部访�
 
 首先在集群内部运行2个nginx Pod用作演示。
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ kubectl run nginx --image=nginx --replicas=2
 {{< /highlight >}}
 
 再将它暴露为Service，同时设定`externalIPs`字段
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ kubectl expose deployment nginx --port 80 --external-ip 172.17.8.201
 {{< /highlight >}}
 
 查看`iptables`配置，确认对应的`iptables`规则已经被加入。
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ sudo iptables -t nat -L KUBE-SERVICES -n
 Chain KUBE-SERVICES (2 references)
 target     prot opt source               destination
@@ -73,25 +73,25 @@ KUBE-NODEPORTS  all  --  0.0.0.0/0            0.0.0.0/0            /* kubernetes
 
 首先在IPVS服务器上，打开`ipv4_forward`。
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ sudo sysctl -w net.ipv4.ip_forward=1
 {{< /highlight >}}
 
 接下来加载IPVS内核模块。
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ sudo modprobe ip_vs
 {{< /highlight >}}
 
 将VIP绑定在网卡上。
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ sudo ifconfig eth0:0 172.17.8.201 netmask 255.255.255.0 broadcast 172.17.8.255
 {{< /highlight >}}
 
 再使用`ipvsadm`来配置IPVS，这里我们直接使用Docker镜像，避免和特定发行版绑定。
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ docker run --privileged -it --rm --net host luizbafilho/ipvsadm
 / # ipvsadm
 IP Virtual Server version 1.2.1 (size=4096)
@@ -115,7 +115,7 @@ TCP  172.17.8.201:http wlc
 
 首先使用`curl`来测试是否能够正常访问nginx服务。
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ curl http://172.17.8.201
 <!DOCTYPE html>
 <html>
@@ -146,7 +146,7 @@ Commercial support is available at
 
 接下来在`172.17.8.11`上抓包来确认IPVS的工作情况。
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ sudo tcpdump -i any port 80
 tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
 listening on any, link-type LINUX_SLL (Linux cooked), capture size 262144 bytes

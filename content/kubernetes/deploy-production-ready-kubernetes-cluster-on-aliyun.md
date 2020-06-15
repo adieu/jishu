@@ -91,7 +91,7 @@ CoreOS版本升级
 
 在顺利搭建好升级服务器之后，可以修改`/etc/coreos/update.conf`，添加`SERVER=https://YOUR_SERVER/v1/update/`这一条配置，然后使用以下指令来升级服务器：
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 sudo systemctl restart update-engine
 update_engine_client -update
 {{< /highlight >}}
@@ -684,7 +684,7 @@ write_files:
 `kube-aliyun`的Pod已经在Master服务器组的描述文件中进行了定义，但是这个Pod会因为缺少必要的Secret无法启动。
 我们创建这个Secret，来激活`kube-aliyun`：
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 kubectl create secret generic aliyun-creds --namespace=kube-system --from-literal=accessKey=${YOUR_ACCESS_KEY} --from-literal=accessKeySecret=${YOUR_ACCESS_KEY_SECRET}
 {{< /highlight >}}
 
