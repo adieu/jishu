@@ -52,7 +52,7 @@ title = "再见ELK，您好fluent-bit-aliyun"
 
 Docker原生支持`fluentd`格式日志输出。我们可以在容器中运行`fluent-bit-aliyun`，然后在启动新容器时进行配置将日志发送给它即可。
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ docker run -d --network host -e ALIYUN_ACCESS_KEY=YOUR_ACCESS_KEY -e ALIYUN_ACCESS_KEY_SECRET=YOUR_ACCESS_KEY_SECRET -e ALIYUN_SLS_PROJECT=YOUR_PROJECT -e ALIYUN_SLS_LOGSTORE=YOUR_LOGSTORE -e ALIYUN_SLS_ENDPOINT=cn-hangzhou.log.aliyuncs.com kubeup/fluent-bit-aliyun:master /fluent-bit/bin/fluent-bit -c /fluent-bit/etc/fluent-bit-forwarder.conf -e /fluent-bit/out_sls.so
 $ docker run --log-driver=fluentd -d nginx
 {{< /highlight >}}
@@ -66,19 +66,19 @@ $ docker run --log-driver=fluentd -d nginx
 
 首先，我们创建一个新的`Secret`来保存所有的配置信息：
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ kubectl create secret generic fluent-bit-config --namespace=kube-system --from-literal=ALIYUN_ACCESS_KEY=YOUR_ACCESS_KEY --from-literal=ALIYUN_ACCESS_KEY_SECRET=YOUR_ACCESS_KEY_SECRET --from-literal=ALIYUN_SLS_PROJECT=YOUR_PROJECT --from-literal=ALIYUN_SLS_LOGSTORE=YOUR_LOGSTORE --from-literal=ALIYUN_SLS_ENDPOINT=cn-hangzhou.log.aliyuncs.com
 {{< /highlight >}}
 
 接下来部署`DaemonSet`:
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ kubectl create -f https://raw.githubusercontent.com/kubeup/fluent-bit-aliyun/master/fluent-bit-daemonset.yaml
 {{< /highlight >}}
 
 我们可以使用`kubectl`来检查部署情况：
 
-{{< highlight console "lineseparator=<br>" >}}
+{{< highlight bash "lineseparator=<br>" >}}
 $ kubectl get pods --namespace=kube-system
 {{< /highlight >}}
 

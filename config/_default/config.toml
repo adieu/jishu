@@ -1,0 +1,26 @@
+baseurl = "https://jishu.io/"
+languageCode = "en-us"
+title = "极术"
+theme = "hyde"
+
+summaryLength=20
+
+[params]
+description = "科学技术是第一生产力"
+
+[[menu.main]]
+    name = "Kubernetes"
+    identifier = "kubernetes"
+    url = "/kubernetes/"
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    style = "native"
+    tabWidth = 4
