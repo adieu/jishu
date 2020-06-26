@@ -13,6 +13,11 @@ description = "科学技术是第一生产力"
     identifier = "kubernetes"
     url = "/kubernetes/"
 
+[[menu.main]]
+    name = "NixOS"
+    identifier = "nixos"
+    url = "/nixos/"
+
 [markup]
   [markup.highlight]
     codeFences = true
