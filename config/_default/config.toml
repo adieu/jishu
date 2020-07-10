@@ -5,6 +5,8 @@ theme = "hyde"
 
 summaryLength=20
 
+googleAnalytics = "UA-1005700-13"
+
 [params]
 description = "科学技术是第一生产力"
 
